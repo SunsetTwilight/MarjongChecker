@@ -1,6 +1,7 @@
 #pragma once
 #include "MarjongChecker.h"
 
+
 enum class MentsuType
 {
     Tartsu,
@@ -22,8 +23,7 @@ struct Mentsu
 
 class FormChecker : public MarjongChecker
 {
-    bool Tenpai;
-
+ 
 public:
 
     FormChecker(){}

@@ -89,6 +89,18 @@ public:
 	{
 		return this->operator%(tile);
 	}
+
+	bool CheckToitsu
+
+
+
+
+
+
+
+
+
+
 };
 
 C_Data ChengePrime(unsigned int num)
