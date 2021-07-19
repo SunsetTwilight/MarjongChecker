@@ -7,13 +7,17 @@ class YakuChecker : public MarjongChecker
 {
 private:
 
-    int Point;
+    unsigned int Point;
+    unsigned int KuisagariPoint;
 public:
 
-    YakuChecker(int point) : Point(point) {} //形が処理に関係ない役(清一色など)
+    YakuChecker(int point) : Point(point), KuisagariPoint(point) {} 
+    YakuChecker(int point, unsigned int kuisagariPoint) : Point(point), KuisagariPoint(kuisagariPoint) {} 
 
     template <class _Ty>
-    YakuChecker(int point) : Point(point) {} //形が処理に関係する役(七対子など)
+    YakuChecker(int point) : Point(point), KuisagariPoint(point) {} 
+    template <class _Ty>
+    YakuChecker(int point , unsigned int kuisagariPoint) : Point(point), KuisagariPoint(kuisagariPoint) {} 
 
     virtual ~YakuChecker(){}
 
@@ -24,7 +28,7 @@ class Tin_Itsu : public YakuChecker
 {
 public:
 
-    Tin_Itsu() : YakuChecker(6) {}
+    Tin_Itsu() : YakuChecker(6, 5) {}
     ~Tin_Itsu(){}
 
     bool Check()
