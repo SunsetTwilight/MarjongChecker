@@ -90,7 +90,7 @@ public:
 		return this->operator%(tile);
 	}
 
-	bool CheckToitsu
+	//bool CheckToitsu
 
 
 

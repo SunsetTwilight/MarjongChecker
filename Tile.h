@@ -23,6 +23,7 @@ public:
 	void ChangeTable(Tile& tile) { std::swap(tile_num, tile.GetTileNum()); }
 
 	Tile() :tile_num(34) {};
+
 	Tile(const Tile&) {};
 
 	void operator=(Tile) = delete;

@@ -1,11 +1,9 @@
 #pragma once
 #include "MarjongChecker.h"
-
+#include <vector>
 
 enum class MentsuType
 {
-    Tartsu,
-    Toitsu,
     Koutsu,
     Syuntsu
 };
@@ -13,28 +11,54 @@ enum class MentsuType
 struct Mentsu
 {
     MentsuType type;
-    int num;
+    unsigned int num;
 
     Mentsu(MentsuType type, unsigned int num) : type(type), num(num) {}
 };
 
-
-
-
-class FormChecker : public MarjongChecker
+struct Toitsu
 {
- 
+    unsigned int num;
+
+    Toitsu(unsigned int num) : num(num) {}
+};
+
+enum class TartsuForm
+{
+    KanTyan,
+    Ryanmen
+};
+
+struct Tartsu
+{
+    TartsuForm form;
+    unsigned int num;
+
+    Tartsu(TartsuForm form, unsigned int num) : form(form), num(num) {}
+};
+
+class Form
+{
+    std::vector<Mentsu> mentsus;
+};
+
+class FormChecker
+{
+private:
+
+
+
 public:
 
     FormChecker(){}
 
-    bool virtual Check() = 0;
+    bool virtual Check(MarjongChecker checkData) = 0;
 };
 
 class DefaultForm : public FormChecker
 {
 public:
-    bool Check();
+    bool Check(MarjongChecker checkData);
 };
 
 class SevenToitsuForm : public FormChecker

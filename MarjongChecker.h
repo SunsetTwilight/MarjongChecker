@@ -9,7 +9,7 @@ class MarjongChecker //–ƒ‚Ì”»’è‚ÌŠî’êƒNƒ‰ƒX
 private:
 	Tehai_C_Data data;
 
-protected:
+public:
 	bool CheckHai(unsigned int num);
 	bool CheckHai(Tile& tile);
 	bool CheckToitsu(Tile& tile);
@@ -18,7 +18,12 @@ protected:
 	bool CheckSyuntsu(Tile& tile); //(num) ‚ğæ“ª‚Æ‚µ‚Äl‚¦‚é
 	bool CheckKantsu(Tile& tile);
 
-public:
+	bool CheckType(TileType type);
+
+	bool InsertHai(Tile& tile);
+	bool ExtractHai(Tile& tile);
+
+
 	MarjongChecker() : data() {}
 	virtual ~MarjongChecker() {}
 

@@ -99,3 +99,46 @@ bool MarjongChecker::CheckKantsu(Tile& tile)
 	}
 	return true;
 }
+
+bool MarjongChecker::CheckType(TileType type)
+{
+
+	 if(data.Get_C_Data(type) == 1);
+
+	return true;
+}
+
+bool MarjongChecker::InsertHai(Tile& tile)
+{
+	for (int i = 0; i < 4; i++)
+	{
+		if (CheckHai(tile))
+		{
+			data.ExtractHai(tile);
+		}
+		else
+		{
+			for (int k = (i - 1); 0 < k; k++)
+			{
+				data.InsertHai(tile);
+			}
+			data.InsertHai(tile);
+
+			return true;
+		}
+	}
+	for (int i = 0; i < 4; i++)
+	{
+		data.InsertHai(tile);
+	}
+	return false;
+}
+bool MarjongChecker::ExtractHai(Tile& tile)
+{
+	if (CheckHai(tile))
+	{
+		data.ExtractHai(tile);
+		return true;
+	}
+	return false;
+}
