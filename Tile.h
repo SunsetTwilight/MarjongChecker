@@ -30,7 +30,6 @@ public:
 	void operator=(Tile&) = delete;
 	void operator=(const Tile&) = delete;
 
-	Tile(unsigned int num) : tile_num(num) {}
 	Tile(unsigned int& num) : tile_num(num) {}
 	Tile(const unsigned int& num) : tile_num(num) {}
 

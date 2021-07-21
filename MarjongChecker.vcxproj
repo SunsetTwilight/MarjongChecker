@@ -140,17 +140,27 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="CompressionData.cpp" />
+    <ClCompile Include="DefaultCompleteFace.cpp" />
+    <ClCompile Include="DefaultFormChecker.cpp" />
+    <ClCompile Include="DefaultMissingFace.cpp" />
     <ClCompile Include="FormChecker.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MarjongChecker.cpp" />
+    <ClCompile Include="CompleteFace.cpp" />
+    <ClCompile Include="MissingFace.cpp" />
     <ClCompile Include="Tehai_C_Data.cpp" />
     <ClCompile Include="Tile.cpp" />
     <ClCompile Include="YakuChecker.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CompressionData.h" />
+    <ClInclude Include="DefaultCompleteFace.h" />
+    <ClInclude Include="DefaultFormChecker.h" />
+    <ClInclude Include="DefaultMissingFace.h" />
     <ClInclude Include="FormChecker.h" />
     <ClInclude Include="MarjongChecker.h" />
+    <ClInclude Include="CompleteFace.h" />
+    <ClInclude Include="MissingFace.h" />
     <ClInclude Include="Tehai_C_Data.h" />
     <ClInclude Include="Tile.h" />
     <ClInclude Include="YakuChecker.h" />

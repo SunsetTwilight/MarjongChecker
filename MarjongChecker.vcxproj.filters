@@ -13,48 +13,87 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="System">
+      <UniqueIdentifier>{9f153444-1e03-4598-915e-4bd4549c1fda}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="System\Header">
+      <UniqueIdentifier>{bc2047e9-8f91-4efe-a29a-c822456fc4e6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="System\Source">
+      <UniqueIdentifier>{57bd7e69-3415-4fd0-ac14-0d255d2595b5}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="MarjongChecker.cpp">
+    <ClCompile Include="DefaultMissingFace.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="Tile.cpp">
+    <ClCompile Include="DefaultCompleteFace.cpp">
       <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="DefaultFormChecker.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="CompleteFace.cpp">
+      <Filter>System\Source</Filter>
     </ClCompile>
     <ClCompile Include="CompressionData.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="Tehai_C_Data.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="YakuChecker.cpp">
-      <Filter>ソース ファイル</Filter>
+      <Filter>System\Source</Filter>
     </ClCompile>
     <ClCompile Include="FormChecker.cpp">
-      <Filter>ソース ファイル</Filter>
+      <Filter>System\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="MarjongChecker.cpp">
+      <Filter>System\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="MissingFace.cpp">
+      <Filter>System\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Tehai_C_Data.cpp">
+      <Filter>System\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Tile.cpp">
+      <Filter>System\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="YakuChecker.cpp">
+      <Filter>System\Source</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="MarjongChecker.h">
+    <ClInclude Include="DefaultMissingFace.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="Tile.h">
+    <ClInclude Include="DefaultCompleteFace.h">
       <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="DefaultFormChecker.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="CompleteFace.h">
+      <Filter>System\Header</Filter>
     </ClInclude>
     <ClInclude Include="CompressionData.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="Tehai_C_Data.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="YakuChecker.h">
-      <Filter>ヘッダー ファイル</Filter>
+      <Filter>System\Header</Filter>
     </ClInclude>
     <ClInclude Include="FormChecker.h">
-      <Filter>ヘッダー ファイル</Filter>
+      <Filter>System\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="MarjongChecker.h">
+      <Filter>System\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="MissingFace.h">
+      <Filter>System\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="Tehai_C_Data.h">
+      <Filter>System\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="Tile.h">
+      <Filter>System\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="YakuChecker.h">
+      <Filter>System\Header</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

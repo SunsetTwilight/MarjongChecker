@@ -10,7 +10,7 @@ private:
 	Tehai_C_Data data;
 
 public:
-	bool CheckHai(unsigned int num);
+	
 	bool CheckHai(Tile& tile);
 	bool CheckToitsu(Tile& tile);
 	bool CheckTartsu(Tile& tile, unsigned int patarn); //(num) を先頭として考える (patarn) はターツの並び順 (0 = 連番,1 = 1つ飛ばし)
@@ -18,11 +18,22 @@ public:
 	bool CheckSyuntsu(Tile& tile); //(num) を先頭として考える
 	bool CheckKantsu(Tile& tile);
 
+	bool CheckHai(unsigned int& num);
+	bool CheckToitsu(unsigned int& num);
+	bool CheckTartsu(unsigned int& num, unsigned int& patarn); //(num) を先頭として考える (patarn) はターツの並び順 (0 = 連番,1 = 1つ飛ばし)
+	bool CheckKoutsu(unsigned int& num);
+	bool CheckSyuntsu(unsigned int& num); //(num) を先頭として考える
+	bool CheckKantsu(unsigned int& num);
+
 	bool CheckType(TileType type);
 
 	bool InsertHai(Tile& tile);
+	bool InsertHai(unsigned int& tile);
+	bool InsertHai(const unsigned int& num);
+	
 	bool ExtractHai(Tile& tile);
-
+	bool ExtractHai(unsigned int& tile);
+	bool ExtractHai(const unsigned int& num);
 
 	MarjongChecker() : data() {}
 	virtual ~MarjongChecker() {}

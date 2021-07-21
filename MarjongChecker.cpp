@@ -1,12 +1,6 @@
 #include "MarjongChecker.h"
 
-bool MarjongChecker::CheckHai(unsigned int num)
-{
-	Tile tile = {};
-	tile.SetTileNum(num);
-	if (data.ExistHai(tile)) return true;
-	else return false;
-}
+
 
 bool MarjongChecker::CheckHai(Tile& tile)
 {
@@ -100,6 +94,44 @@ bool MarjongChecker::CheckKantsu(Tile& tile)
 	return true;
 }
 
+bool MarjongChecker::CheckHai(unsigned int& num)
+{
+	Tile tile = {};
+	tile.SetTileNum(num);
+	return CheckHai(tile);
+}
+
+bool MarjongChecker::CheckToitsu(unsigned int& num)
+{
+	Tile tile = {};
+	tile.SetTileNum(num);
+	return CheckToitsu(tile);
+}
+bool MarjongChecker::CheckTartsu(unsigned int& num, unsigned int& patarn)
+{
+	Tile tile = {};
+	tile.SetTileNum(num);
+	return CheckTartsu(tile, patarn);
+}
+bool MarjongChecker::CheckKoutsu(unsigned int& num)
+{
+	Tile tile = {};
+	tile.SetTileNum(num);
+	return CheckKoutsu(tile);
+}
+bool MarjongChecker::CheckSyuntsu(unsigned int& num)
+{
+	Tile tile = {};
+	tile.SetTileNum(num);
+	return CheckSyuntsu(tile);
+}
+bool MarjongChecker::CheckKantsu(unsigned int& num)
+{
+	Tile tile = {};
+	tile.SetTileNum(num);
+	return CheckKantsu(tile);
+}
+
 bool MarjongChecker::CheckType(TileType type)
 {
 
@@ -118,7 +150,7 @@ bool MarjongChecker::InsertHai(Tile& tile)
 		}
 		else
 		{
-			for (int k = (i - 1); 0 < k; k++)
+			for (int k = (i - 1); 0 < k; k--)
 			{
 				data.InsertHai(tile);
 			}
@@ -141,4 +173,28 @@ bool MarjongChecker::ExtractHai(Tile& tile)
 		return true;
 	}
 	return false;
+}
+
+bool MarjongChecker::InsertHai(unsigned int& num)
+{
+	Tile tile(num);
+	InsertHai(tile);
+}
+
+bool MarjongChecker::ExtractHai(unsigned int& num)
+{
+	Tile tile(num);
+	ExtractHai(tile);
+}
+
+bool MarjongChecker::InsertHai(const unsigned int& num)
+{
+	Tile tile(num);
+	InsertHai(tile);
+}
+
+bool MarjongChecker::ExtractHai(const unsigned int& num)
+{
+	Tile tile(num);
+	ExtractHai(tile);
 }
