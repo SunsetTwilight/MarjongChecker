@@ -2,8 +2,8 @@
 
 unsigned int DefaultFormChecker::SetKoutsuList(DefaultForm&& res_form, MarjongChecker&& res_check, DefaultForm form, MarjongChecker check)
 {
-    res_form = form;
-    res_check = check;
+    res_form = std::move(form);
+    res_check = std::move(check);
 
     for (unsigned int i = 0; i < 4; i++)
     {
@@ -25,8 +25,8 @@ unsigned int DefaultFormChecker::SetKoutsuList(DefaultForm&& res_form, MarjongCh
 }
 unsigned int DefaultFormChecker::SetSyuntsuFrontList(DefaultForm&& res_form, MarjongChecker&& res_check, DefaultForm form, MarjongChecker check)
 {
-    res_form = form;
-    res_check = check;
+    res_form = std::move(form);
+    res_check = std::move(check);
 
     for (unsigned int i = 0; i < 4; i++)
     {
@@ -48,8 +48,8 @@ unsigned int DefaultFormChecker::SetSyuntsuFrontList(DefaultForm&& res_form, Mar
 }
 unsigned int DefaultFormChecker::SetSyuntsuBackList(DefaultForm&& res_form, MarjongChecker&& res_check, DefaultForm form, MarjongChecker check)
 {
-    res_form = form;
-    res_check = check;
+    res_form = std::move(form);
+    res_check = std::move(check);
 
     for (unsigned int i = 0; i < 3; i++)
     {
@@ -70,8 +70,8 @@ unsigned int DefaultFormChecker::SetSyuntsuBackList(DefaultForm&& res_form, Marj
 
 unsigned int DefaultFormChecker::SetToitsuList(DefaultForm&& res_form, MarjongChecker&& res_check, DefaultForm form, MarjongChecker check)
 {
-    res_form = form;
-    res_check = check;
+    res_form = std::move(form);
+    res_check = std::move(check);
 
     for (unsigned int i = 0; i < 4; i++)
     {
@@ -90,8 +90,8 @@ unsigned int DefaultFormChecker::SetToitsuList(DefaultForm&& res_form, MarjongCh
 }
 unsigned int DefaultFormChecker::SetTartsuFrontList(DefaultForm&& res_form, MarjongChecker&& res_check, DefaultForm form, MarjongChecker check)
 {
-    res_form = form;
-    res_check = check;
+    res_form = std::move(form);
+    res_check = std::move(check);
 
     for (unsigned int i = 0; i < 3; i++)
     {
@@ -115,8 +115,8 @@ unsigned int DefaultFormChecker::SetTartsuFrontList(DefaultForm&& res_form, Marj
 }
 unsigned int DefaultFormChecker::SetTartsuBackList(DefaultForm&& res_form, MarjongChecker&& res_check, DefaultForm form, MarjongChecker check)
 {
-    res_form = form;
-    res_check = check;
+    res_form = std::move(form);
+    res_check = std::move(check);
 
     for (unsigned int i = 0; i < 3; i++)
     {
@@ -160,7 +160,10 @@ bool DefaultFormChecker::CreateFormList(MarjongChecker checkData)
 		{
 			for (unsigned int i = 0; i < 33; i++)
 			{
-                
+                DefaultForm form;
+                MarjongChecker c;
+
+                SetKoutsuList(std::move(form), std::move(c), form, data);
 
 				//SetKoutsuList()
 					//SyuntsuFront()
