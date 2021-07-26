@@ -17,12 +17,16 @@ struct DefaultForm
 class DefaultFormChecker : public FormChecker<DefaultForm>
 {
 private:
-    unsigned int SetKoutsuList(DefaultForm& res_form, MarjongChecker& res_check, DefaultForm form, MarjongChecker check);
-    unsigned int SetSyuntsuFrontList(DefaultForm& res_form, MarjongChecker& res_check, DefaultForm form, MarjongChecker check);
-    unsigned int SetSyuntsuBackList(DefaultForm& res_form, MarjongChecker& res_check, DefaultForm form, MarjongChecker check);
-    unsigned int SetToitsuList(DefaultForm& res_form, MarjongChecker& res_check, DefaultForm form, MarjongChecker check);
-    unsigned int SetTartsuFrontList(DefaultForm& res_form, MarjongChecker& res_check, DefaultForm form, MarjongChecker check);
-    unsigned int SetTartsuBackList(DefaultForm& res_form, MarjongChecker& res_check, DefaultForm form, MarjongChecker check);
+    unsigned int SetKoutsuList(DefaultForm&& res_form, MarjongChecker&& res_check, DefaultForm form, MarjongChecker check);
+    unsigned int SetSyuntsuFrontList(DefaultForm&& res_form, MarjongChecker&& res_check, DefaultForm form, MarjongChecker check);
+    unsigned int SetSyuntsuBackList(DefaultForm&& res_form, MarjongChecker&& res_check, DefaultForm form, MarjongChecker check);
+    unsigned int SetToitsuList(DefaultForm&& res_form, MarjongChecker&& res_check, DefaultForm form, MarjongChecker check);
+    unsigned int SetTartsuFrontList(DefaultForm&& res_form, MarjongChecker&& res_check, DefaultForm form, MarjongChecker check);
+    unsigned int SetTartsuBackList(DefaultForm&& res_form, MarjongChecker&& res_check, DefaultForm form, MarjongChecker check);
+
+    void SetFormList(DefaultForm& res_form, MarjongChecker& res_check);
+
+    std::vector<DefaultForm> curFormList;
 
 public:
     bool CreateFormList(MarjongChecker checkData);

@@ -1,6 +1,6 @@
 #include "DefaultFormChecker.h"
 
-unsigned int DefaultFormChecker::SetKoutsuList(DefaultForm& res_form, MarjongChecker& res_check, DefaultForm form, MarjongChecker check)
+unsigned int DefaultFormChecker::SetKoutsuList(DefaultForm&& res_form, MarjongChecker&& res_check, DefaultForm form, MarjongChecker check)
 {
     res_form = std::move(form);
     res_check = std::move(check);
@@ -9,21 +9,38 @@ unsigned int DefaultFormChecker::SetKoutsuList(DefaultForm& res_form, MarjongChe
     {
         if (res_check.CheckType((TileType)i) != 1)
         {
-            for (unsigned int j = 0; j < 9; j++)
+            if (i == 4)
             {
-                if (res_check.CheckKoutsu(j))
+                for (unsigned int j = 0; j < 7; j++)
                 {
-                    res_check.ExtractHai(j);
-                    res_check.ExtractHai(j);
-                    res_check.ExtractHai(j);
+                    if (res_check.CheckKoutsu(i * 9 + j))
+                    {
+                        res_check.ExtractHai(i * 9 + j);
+                        res_check.ExtractHai(i * 9 + j);
+                        res_check.ExtractHai(i * 9 + j);
 
-                    res_form.comp_face.push_back(DefaultCompleteFace(DefaultCompleteFaceType::Koutsu, j));
+                        res_form.comp_face.push_back(DefaultCompleteFace(DefaultCompleteFaceType::Koutsu, i * 9 + j));
+                    }
+                }
+            }
+            else
+            {
+                for (unsigned int j = 0; j < 9; j++)
+                {
+                    if (res_check.CheckKoutsu(i * 9 + j))
+                    {
+                        res_check.ExtractHai(i * 9 + j);
+                        res_check.ExtractHai(i * 9 + j);
+                        res_check.ExtractHai(i * 9 + j);
+
+                        res_form.comp_face.push_back(DefaultCompleteFace(DefaultCompleteFaceType::Koutsu, i * 9 + j));
+                    }
                 }
             }
         }
     }
 }
-unsigned int DefaultFormChecker::SetSyuntsuFrontList(DefaultForm& res_form, MarjongChecker& res_check, DefaultForm form, MarjongChecker check)
+unsigned int DefaultFormChecker::SetSyuntsuFrontList(DefaultForm&& res_form, MarjongChecker&& res_check, DefaultForm form, MarjongChecker check)
 {
     res_form = std::move(form);
     res_check = std::move(check);
@@ -34,19 +51,19 @@ unsigned int DefaultFormChecker::SetSyuntsuFrontList(DefaultForm& res_form, Marj
         {
             for (unsigned int j = 0; j < 9; j++)
             {
-                if (check.CheckSyuntsu(j))
+                if (check.CheckSyuntsu(i * 9 + j))
                 {
-                    check.ExtractHai(j);
-                    check.ExtractHai(j + 1);
-                    check.ExtractHai(j + 2);
+                    check.ExtractHai(i * 9 + j);
+                    check.ExtractHai(i * 9 + j + 1);
+                    check.ExtractHai(i * 9 + j + 2);
 
-                    res_form.comp_face.push_back(DefaultCompleteFace(DefaultCompleteFaceType::Syuntsu, j));
+                    res_form.comp_face.push_back(DefaultCompleteFace(DefaultCompleteFaceType::Syuntsu, i * 9 + j));
                 }
             }
         }
     }
 }
-unsigned int DefaultFormChecker::SetSyuntsuBackList(DefaultForm& res_form, MarjongChecker& res_check, DefaultForm form, MarjongChecker check)
+unsigned int DefaultFormChecker::SetSyuntsuBackList(DefaultForm&& res_form, MarjongChecker&& res_check, DefaultForm form, MarjongChecker check)
 {
     res_form = std::move(form);
     res_check = std::move(check);
@@ -57,18 +74,18 @@ unsigned int DefaultFormChecker::SetSyuntsuBackList(DefaultForm& res_form, Marjo
         {
             for (unsigned int j = 6; 0 < j; j--)
             {
-                if (check.CheckSyuntsu(j))
+                if (check.CheckSyuntsu(i * 9 + j))
                 {
-                    check.ExtractHai(j);
-                    check.ExtractHai(j - 1);
-                    check.ExtractHai(j - 2);
+                    check.ExtractHai(i * 9 + j);
+                    check.ExtractHai(i * 9 + j - 1);
+                    check.ExtractHai(i * 9 + j - 2);
                 }
             }
         }
     }
 }
 
-unsigned int DefaultFormChecker::SetToitsuList(DefaultForm& res_form, MarjongChecker& res_check, DefaultForm form, MarjongChecker check)
+unsigned int DefaultFormChecker::SetToitsuList(DefaultForm&& res_form, MarjongChecker&& res_check, DefaultForm form, MarjongChecker check)
 {
     res_form = std::move(form);
     res_check = std::move(check);
@@ -77,18 +94,32 @@ unsigned int DefaultFormChecker::SetToitsuList(DefaultForm& res_form, MarjongChe
     {
         if (check.CheckType((TileType)i) != 1)
         {
-            for (unsigned int j = 0; j < 9; j++)
+            if (i == 4)
             {
-                if (check.CheckToitsu(j))
+                for (unsigned int j = 0; j < 7; j++)
                 {
-                    check.ExtractHai(j);
-                    check.ExtractHai(j);
+                    if (check.CheckToitsu(i * 9 + j))
+                    {
+                        check.ExtractHai(i * 9 + j);
+                        check.ExtractHai(i * 9 + j);
+                    }
+                }
+            }
+            else
+            {
+                for (unsigned int j = 0; j < 9; j++)
+                {
+                    if (check.CheckToitsu(i * 9 + j))
+                    {
+                        check.ExtractHai(i * 9 + j);
+                        check.ExtractHai(i * 9 + j);
+                    }
                 }
             }
         }
     }
 }
-unsigned int DefaultFormChecker::SetTartsuFrontList(DefaultForm& res_form, MarjongChecker& res_check, DefaultForm form, MarjongChecker check)
+unsigned int DefaultFormChecker::SetTartsuFrontList(DefaultForm&& res_form, MarjongChecker&& res_check, DefaultForm form, MarjongChecker check)
 {
     res_form = std::move(form);
     res_check = std::move(check);
@@ -104,16 +135,16 @@ unsigned int DefaultFormChecker::SetTartsuFrontList(DefaultForm& res_form, Marjo
             {
                 start_num = j / 8;
                 patarn_num = j % 2;
-                if (check.CheckTartsu(start_num, patarn_num))
+                if (check.CheckTartsu(i * 9 + start_num, patarn_num))
                 {
-                    check.ExtractHai(start_num);
-                    check.ExtractHai(start_num + patarn_num + 1);
+                    check.ExtractHai(i * 9 + start_num);
+                    check.ExtractHai(i * 9 + start_num + patarn_num + 1);
                 }
             }
         }
     }
 }
-unsigned int DefaultFormChecker::SetTartsuBackList(DefaultForm& res_form, MarjongChecker& res_check, DefaultForm form, MarjongChecker check)
+unsigned int DefaultFormChecker::SetTartsuBackList(DefaultForm&& res_form, MarjongChecker&& res_check, DefaultForm form, MarjongChecker check)
 {
     res_form = std::move(form);
     res_check = std::move(check);
@@ -129,18 +160,39 @@ unsigned int DefaultFormChecker::SetTartsuBackList(DefaultForm& res_form, Marjon
             {
                 start_num = j / 8;
                 patarn_num = j % 2;
-                if (check.CheckTartsu(start_num, patarn_num))
+                if (check.CheckTartsu(i * 9 + start_num, patarn_num))
                 {
-                    check.ExtractHai(start_num);
-                    check.ExtractHai(start_num + patarn_num + 1);
+                    check.ExtractHai(i * 9 + start_num);
+                    check.ExtractHai(i * 9 + start_num + patarn_num + 1);
                 }
             }
         }
     }
 }
 
+void DefaultFormChecker::SetFormList(DefaultForm& form, MarjongChecker& check)
+{
+    //残り牌の羅列、セット
+    int num = form.comp_face.size() + form.one_miss_face.size();
+
+    for (unsigned int i = 0; i < 4; i++)
+    {
+        if (check.CheckType((TileType)i) != 1)
+        {
+            for (unsigned int j = 0; j < 9; j++)
+            {
+                check.CheckHai((i * 9) + j);
+                form.remainder_tile.push_back((i * 9) + j);
+            }
+        }
+    }
+
+    curFormList.push_back(form);
+}
+
 bool DefaultFormChecker::CreateFormList(MarjongChecker checkData)
 {
+    curFormList.clear();
 	MarjongChecker data = checkData;
 
 	enable_type[0] = data.CheckType(TileType::Manzu);
@@ -167,141 +219,141 @@ bool DefaultFormChecker::CreateFormList(MarjongChecker checkData)
 
             DefaultForm f00;
             MarjongChecker c00;
-            SetKoutsuList(f00, c00, form, checker);
+            SetKoutsuList(std::move(f00), std::move(c00), form, checker);
             {
                 DefaultForm f01;
                 MarjongChecker c01;
-                SetSyuntsuFrontList(f01, c01, f00, c00);
+                SetSyuntsuFrontList(std::move(f01), std::move(c01), f00, c00);
                 {
                     DefaultForm f02;
                     MarjongChecker c02;
-                    SetToitsuList(f02, c02, f01, c01);
+                    SetToitsuList(std::move(f02), std::move(c02), f01, c01);
                     {
                         DefaultForm f03;
                         MarjongChecker c03;
-                        SetTartsuFrontList(f03, c03, f02, c02);
+                        SetTartsuFrontList(std::move(f03), std::move(c03), f02, c02);
                         {
 
                         }
-                        SetTartsuBackList(f03, c03, f02, c02);
-                        {
-
-                        }
-                    }
-                    SetTartsuFrontList(f02, c02, f01, c01);
-                    {
-                        DefaultForm f03;
-                        MarjongChecker c03;
-                        SetToitsuList(f03, c03, f02, c02);
+                        SetTartsuBackList(std::move(f03), std::move(c03), f02, c02);
                         {
 
                         }
                     }
-                    SetTartsuBackList(f02, c02, f01, c01);
+                    SetTartsuFrontList(std::move(f02), std::move(c02), f01, c01);
                     {
                         DefaultForm f03;
                         MarjongChecker c03;
-                        SetToitsuList(f03, c03, f02, c02);
+                        SetToitsuList(std::move(f03), std::move(c03), f02, c02);
+                        {
+
+                        }
+                    }
+                    SetTartsuBackList(std::move(f02), std::move(c02), f01, c01);
+                    {
+                        DefaultForm f03;
+                        MarjongChecker c03;
+                        SetToitsuList(std::move(f03), std::move(c03), f02, c02);
                         {
 
                         }
                     }
                 }
-                SetSyuntsuBackList(f01, c01, f00, c00);
+                SetSyuntsuBackList(std::move(f01), std::move(c01), f00, c00);
                 {
                     DefaultForm f02;
                     MarjongChecker c02;
-                    SetToitsuList(f02, c02, f01, c01);
+                    SetToitsuList(std::move(f02), std::move(c02), f01, c01);
                     {
                         DefaultForm f03;
                         MarjongChecker c03;
-                        SetTartsuFrontList(f03, c03, f02, c02);
+                        SetTartsuFrontList(std::move(f03), std::move(c03), f02, c02);
                         {
 
                         }
-                        SetTartsuBackList(f03, c03, f02, c02);
+                        SetTartsuBackList(std::move(f03), std::move(c03), f02, c02);
                         {
 
                         }
                     }
-                    SetTartsuFrontList(f02, c02, f01, c01);
+                    SetTartsuFrontList(std::move(f02), std::move(c02), f01, c01);
                     {
                         DefaultForm f03;
                         MarjongChecker c03;
-                        SetToitsuList(f03, c03, f02, c02);
+                        SetToitsuList(std::move(f03), std::move(c03), f02, c02);
                         {
 
                         }
                     }
-                    SetTartsuBackList(f02, c02, f01, c01);
+                    SetTartsuBackList(std::move(f02), std::move(c02), f01, c01);
                     {
                         DefaultForm f03;
                         MarjongChecker c03;
-                        SetToitsuList(f03, c03, f02, c02);
-                        {
-
-                        }
-                    }
-                }
-            }
-            SetSyuntsuFrontList(f00, c00, form, checker);
-            {
-                DefaultForm f01;
-                MarjongChecker c01;
-                SetKoutsuList(f01, c01, f00, c00);
-                {
-                    DefaultForm f02;
-                    MarjongChecker c02;
-                    SetToitsuList(f02, c02, f01, c01);
-                    {
-                        DefaultForm f03;
-                        MarjongChecker c03;
-                        SetTartsuFrontList(f03, c03, f02, c02);
-                        {
-
-                        }
-                        SetTartsuBackList(f03, c03, f02, c02);
+                        SetToitsuList(std::move(f03), std::move(c03), f02, c02);
                         {
 
                         }
                     }
                 }
             }
-            SetSyuntsuBackList(f00, c00, form, checker);
+            SetSyuntsuFrontList(std::move(f00), std::move(c00), form, checker);
             {
                 DefaultForm f01;
                 MarjongChecker c01;
-                SetKoutsuList(f01, c01, f00, c00);
+                SetKoutsuList(std::move(f01), std::move(c01), f00, c00);
                 {
                     DefaultForm f02;
                     MarjongChecker c02;
-                    SetToitsuList(f02, c02, f01, c01);
+                    SetToitsuList(std::move(f02), std::move(c02), f01, c01);
                     {
                         DefaultForm f03;
                         MarjongChecker c03;
-                        SetTartsuFrontList(f03, c03, f02, c02);
+                        SetTartsuFrontList(std::move(f03), std::move(c03), f02, c02);
                         {
 
                         }
-                        SetTartsuBackList(f03, c03, f02, c02);
-                        {
-
-                        }
-                    }
-                    SetTartsuFrontList(f02, c02, f01, c01);
-                    {
-                        DefaultForm f03;
-                        MarjongChecker c03;
-                        SetToitsuList(f03, c03, f02, c02);
+                        SetTartsuBackList(std::move(f03), std::move(c03), f02, c02);
                         {
 
                         }
                     }
-                    SetTartsuBackList(f02, c02, f01, c01);
+                }
+            }
+            SetSyuntsuBackList(std::move(f00), std::move(c00), form, checker);
+            {
+                DefaultForm f01;
+                MarjongChecker c01;
+                SetKoutsuList(std::move(f01), std::move(c01), f00, c00);
+                {
+                    DefaultForm f02;
+                    MarjongChecker c02;
+                    SetToitsuList(std::move(f02), std::move(c02), f01, c01);
                     {
                         DefaultForm f03;
                         MarjongChecker c03;
-                        SetToitsuList(f03, c03, f02, c02);
+                        SetTartsuFrontList(std::move(f03), std::move(c03), f02, c02);
+                        {
+
+                        }
+                        SetTartsuBackList(std::move(f03), std::move(c03), f02, c02);
+                        {
+
+                        }
+                    }
+                    SetTartsuFrontList(std::move(f02), std::move(c02), f01, c01);
+                    {
+                        DefaultForm f03;
+                        MarjongChecker c03;
+                        SetToitsuList(std::move(f03), std::move(c03), f02, c02);
+                        {
+
+                        }
+                    }
+                    SetTartsuBackList(std::move(f02), std::move(c02), f01, c01);
+                    {
+                        DefaultForm f03;
+                        MarjongChecker c03;
+                        SetToitsuList(std::move(f03), std::move(c03), f02, c02);
                         {
 
                         }

@@ -25,6 +25,14 @@ public:
 	bool CheckSyuntsu(unsigned int& num); //(num) を先頭として考える
 	bool CheckKantsu(unsigned int& num);
 
+	bool CheckHai(const unsigned int& num);
+	bool CheckToitsu(const unsigned int& num);
+	bool CheckTartsu(const unsigned int& num, unsigned int& patarn); //(num) を先頭として考える (patarn) はターツの並び順 (0 = 連番,1 = 1つ飛ばし)
+	bool CheckKoutsu(const unsigned int& num);
+	bool CheckSyuntsu(const unsigned int& num); //(num) を先頭として考える
+	bool CheckKantsu(const unsigned int& num);
+
+
 	bool CheckType(TileType type);
 
 	bool InsertHai(Tile& tile);

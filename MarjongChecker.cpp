@@ -132,6 +132,46 @@ bool MarjongChecker::CheckKantsu(unsigned int& num)
 	return CheckKantsu(tile);
 }
 
+
+bool MarjongChecker::CheckHai(const unsigned int& num)
+{
+	Tile tile = {};
+	tile.SetTileNum(num);
+	return CheckHai(tile);
+}
+
+bool MarjongChecker::CheckToitsu(const unsigned int& num)
+{
+	Tile tile = {};
+	tile.SetTileNum(num);
+	return CheckToitsu(tile);
+}
+bool MarjongChecker::CheckTartsu(const unsigned int& num, unsigned int& patarn)
+{
+	Tile tile = {};
+	tile.SetTileNum(num);
+	return CheckTartsu(tile, patarn);
+}
+bool MarjongChecker::CheckKoutsu(const unsigned int& num)
+{
+	Tile tile = {};
+	tile.SetTileNum(num);
+	return CheckKoutsu(tile);
+}
+bool MarjongChecker::CheckSyuntsu(const unsigned int& num)
+{
+	Tile tile = {};
+	tile.SetTileNum(num);
+	return CheckSyuntsu(tile);
+}
+bool MarjongChecker::CheckKantsu(const unsigned int& num)
+{
+	Tile tile = {};
+	tile.SetTileNum(num);
+	return CheckKantsu(tile);
+}
+
+
 bool MarjongChecker::CheckType(TileType type)
 {
 
