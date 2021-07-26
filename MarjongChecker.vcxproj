@@ -148,6 +148,7 @@
     <ClCompile Include="MarjongChecker.cpp" />
     <ClCompile Include="CompleteFace.cpp" />
     <ClCompile Include="MissingFace.cpp" />
+    <ClCompile Include="Tehai.cpp" />
     <ClCompile Include="Tehai_C_Data.cpp" />
     <ClCompile Include="Tile.cpp" />
     <ClCompile Include="YakuChecker.cpp" />
@@ -161,6 +162,7 @@
     <ClInclude Include="MarjongChecker.h" />
     <ClInclude Include="CompleteFace.h" />
     <ClInclude Include="MissingFace.h" />
+    <ClInclude Include="Tehai.h" />
     <ClInclude Include="Tehai_C_Data.h" />
     <ClInclude Include="Tile.h" />
     <ClInclude Include="YakuChecker.h" />

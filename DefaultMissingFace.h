@@ -4,8 +4,8 @@
 enum class MissingFaceForm
 {
     Toitsu,
+    Ryanmen,
     KanTyan,
-    Ryanmen
 };
 
 class DefaultMissingFace : public MissingFace<MissingFaceForm>
