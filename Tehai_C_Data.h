@@ -58,8 +58,8 @@ public:
 		case TileType::Zihai:
 			return Zihai_C_data;
 		default:
-			CompressionData* _null = nullptr; //Error
-			return *_null;
+			CompressionData _null; //Error
+			return _null;
 			break;
 		}
 	}
@@ -91,16 +91,6 @@ public:
 	}
 
 	//bool CheckToitsu
-
-
-
-
-
-
-
-
-
-
 };
 
 C_Data ChengePrime(unsigned int num)

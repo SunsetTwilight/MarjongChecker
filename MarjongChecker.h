@@ -3,6 +3,7 @@
 #include <iostream>
 
 #include "Tehai_C_Data.h"
+#include "Tehai.h"
 
 class MarjongChecker //–ƒ‚Ì”»’è‚ÌŠî’êƒNƒ‰ƒX
 {
@@ -44,9 +45,9 @@ public:
 	bool ExtractHai(const unsigned int& num);
 
 	MarjongChecker() : data() {}
-	virtual ~MarjongChecker() {}
+	~MarjongChecker() {}
 
-	void Set_TehaiData(/*è”v‚Ì”z—ñ*/) {}
-	Tehai_C_Data& GetData() { return data; }
+	void Set_TehaiData(Tehai tehai);
+	Tehai_C_Data& GetData();
 };
 

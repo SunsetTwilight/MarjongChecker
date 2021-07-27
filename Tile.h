@@ -9,6 +9,7 @@ enum class TileType
 	Zihai
 };
 
+constexpr unsigned int NullTile = 34;
 
 struct Tile
 {
@@ -22,9 +23,9 @@ public:
 
 	void ChangeTable(Tile& tile) { std::swap(tile_num, tile.GetTileNum()); }
 
-	Tile() :tile_num(34) {};
+	Tile() :tile_num(NullTile) {};
 
-	Tile(const Tile&) {};
+	//Tile(const Tile&) {};
 
 	void operator=(Tile) = delete;
 	void operator=(Tile&) = delete;

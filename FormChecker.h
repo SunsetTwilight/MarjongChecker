@@ -2,7 +2,7 @@
 #include "MarjongChecker.h"
 #include <vector>
 
-template <class _Ty>
+template <typename _Ty>
 class FormChecker
 {
 private:
@@ -14,6 +14,7 @@ protected:
 public:
 
     FormChecker(){}
+    ~FormChecker(){}
 
-    bool virtual CreateFormList(MarjongChecker checkData) = 0;
+   // bool virtual CreateFormList(Tehai checkData) = 0;
 };

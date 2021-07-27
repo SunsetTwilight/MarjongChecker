@@ -175,7 +175,10 @@ bool MarjongChecker::CheckKantsu(const unsigned int& num)
 bool MarjongChecker::CheckType(TileType type)
 {
 
-	 if(data.Get_C_Data(type) == 1);
+	if (data.Get_C_Data(type) == 1)
+	{
+		return false;
+	}
 
 	return true;
 }
@@ -238,3 +241,18 @@ bool MarjongChecker::ExtractHai(const unsigned int& num)
 	Tile tile(num);
 	ExtractHai(tile);
 }
+
+void MarjongChecker::Set_TehaiData(Tehai tehai)
+{
+	for (unsigned int i = 0; i < 14; i++)
+	{
+		Tile t = tehai.GetTile(i);
+		if (t.GetTileNum() != NullTile)
+		{
+			data.InsertHai(t);
+		}
+	}
+
+}
+
+Tehai_C_Data& MarjongChecker::GetData() { return data; }
