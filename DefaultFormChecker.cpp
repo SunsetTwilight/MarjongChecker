@@ -220,7 +220,7 @@ unsigned int DefaultFormChecker::SetTartsuBackList(DefaultForm& res_form, Marjon
 void DefaultFormChecker::SetFormList(DefaultForm& form, MarjongChecker& check)
 {
     //残り牌の羅列、セット
-    int num = form.comp_face.size() + form.one_miss_face.size();
+    //int num = form.comp_face.size() + form.one_miss_face.size();
 
     for (unsigned int i = 0; i < 4; i++)
     {
@@ -243,7 +243,6 @@ bool DefaultFormChecker::CreateFormList(Tehai tehai)
     MarjongChecker data;
     data.Set_TehaiData(tehai);
 
-	
 	//雀頭があると仮定した場合の処理
 
 	Tile tile;

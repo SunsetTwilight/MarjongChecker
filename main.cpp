@@ -1,6 +1,6 @@
 #include <stdio.h>
-#include "DefaultFormChecker.h"
-#include "Tehai.h"
+#include "MarjongChecker.h"
+#include "DefaultTehai.h"
 
 int main()
 {

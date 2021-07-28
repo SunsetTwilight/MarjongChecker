@@ -44,10 +44,10 @@ public:
 	bool ExtractHai(unsigned int& tile);
 	bool ExtractHai(const unsigned int& num);
 
-	MarjongChecker() : data() {}
-	~MarjongChecker() {}
+	MarjongChecker();
+	~MarjongChecker();
 
-	void Set_TehaiData(Tehai tehai);
+	void Set_TehaiData(Tehai& tehai);
 	Tehai_C_Data& GetData();
 };
 

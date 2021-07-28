@@ -1,6 +1,5 @@
 #pragma once
-#include "DefaultFormChecker.h"
-#include "DefaultCompleteFace.h"
+#include "Tile.h"
 
 class Tehai
 {
@@ -18,17 +17,4 @@ public:
 
 
 
-class DefaultTehai : public Tehai
-{
-private:
-	unsigned int tehai_count = 14;
 
-	DefaultNakiFace* compFace[4] = { nullptr };
-	unsigned int naki_count = 0;
-
-public:
-	void Naki(DefaultNakiFace face);
-
-	DefaultTehai() {}
-	~DefaultTehai() {}
-};

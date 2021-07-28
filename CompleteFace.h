@@ -1,7 +1,5 @@
 #pragma once
 
-
-
 template <class _Ty>
 class CompleteFace
 {

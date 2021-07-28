@@ -17,24 +17,22 @@ private:
 	unsigned int tile_num;
 
 public:
+	unsigned int& GetTileNum();
+	void SetTileNum(unsigned int num);
+	void ChangeTable(Tile& tile);
 
-	unsigned int& GetTileNum() { return tile_num; }
-	void SetTileNum(unsigned int num) { tile_num = num; }
-
-	void ChangeTable(Tile& tile) { std::swap(tile_num, tile.GetTileNum()); }
-
-	Tile() :tile_num(NullTile) {};
-
+	Tile();
+	Tile(unsigned int& num);
+	Tile(const unsigned int& num);
 	//Tile(const Tile&) {};
 
 	void operator=(Tile) = delete;
 	void operator=(Tile&) = delete;
 	void operator=(const Tile&) = delete;
 
-	Tile(unsigned int& num) : tile_num(num) {}
-	Tile(const unsigned int& num) : tile_num(num) {}
-
+	const unsigned int operator+(const unsigned int num);
+	const unsigned int operator-(const unsigned int num);
 };
 
-unsigned int operator+(Tile& tile, const unsigned int num) { return tile.GetTileNum() + num; }
-unsigned int operator-(Tile& tile, const unsigned int num) { return tile.GetTileNum() + num; }
+//inline unsigned int operator+(Tile& tile, const unsigned int num) { return tile.GetTileNum() + num; }
+//inline unsigned int operator-(Tile& tile, const unsigned int num) { return tile.GetTileNum() + num; }

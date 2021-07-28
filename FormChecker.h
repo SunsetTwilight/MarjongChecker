@@ -2,19 +2,18 @@
 #include "MarjongChecker.h"
 #include <vector>
 
-template <typename _Ty>
+template <class _Ty>
 class FormChecker
 {
 private:
     
 protected:
     std::vector<_Ty> form_list;
-    bool enable_type[4] = { false };
-
+   
 public:
 
-    FormChecker(){}
-    ~FormChecker(){}
+    FormChecker() {} 
+    ~FormChecker() {}
 
-   // bool virtual CreateFormList(Tehai checkData) = 0;
+   bool virtual CreateFormList(Tehai checkData) = 0;
 };

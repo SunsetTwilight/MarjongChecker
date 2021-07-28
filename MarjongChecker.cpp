@@ -221,28 +221,40 @@ bool MarjongChecker::ExtractHai(Tile& tile)
 bool MarjongChecker::InsertHai(unsigned int& num)
 {
 	Tile tile(num);
-	InsertHai(tile);
+	return InsertHai(tile);
 }
 
 bool MarjongChecker::ExtractHai(unsigned int& num)
 {
 	Tile tile(num);
-	ExtractHai(tile);
+	return ExtractHai(tile);
 }
 
 bool MarjongChecker::InsertHai(const unsigned int& num)
 {
 	Tile tile(num);
-	InsertHai(tile);
+	return InsertHai(tile);
 }
 
 bool MarjongChecker::ExtractHai(const unsigned int& num)
 {
 	Tile tile(num);
-	ExtractHai(tile);
+	return ExtractHai(tile);
 }
 
-void MarjongChecker::Set_TehaiData(Tehai tehai)
+
+
+MarjongChecker::MarjongChecker() : data()
+{
+
+}
+
+MarjongChecker::~MarjongChecker()
+{
+
+}
+
+void MarjongChecker::Set_TehaiData(Tehai& tehai)
 {
 	for (unsigned int i = 0; i < 14; i++)
 	{
