@@ -11,7 +11,7 @@ public:
 	Tehai(){}
 	~Tehai(){}
 
-	void SetTile(unsigned int num, unsigned int index) { tiles[index].SetTileNum(num); }
+	void SetTile(unsigned int index, unsigned int num) { tiles[index].SetTileNum(num); }
 	Tile& GetTile(unsigned int num) { return tiles[num]; }
 };
 

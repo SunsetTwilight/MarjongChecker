@@ -31,6 +31,11 @@ private:
 public:
     bool CreateFormList(Tehai tehai);
 
+    std::vector<DefaultForm> GetList()
+    {
+        return curFormList;
+    }
+
     DefaultFormChecker() {}
     ~DefaultFormChecker() {}
 };

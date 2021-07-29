@@ -1,20 +1,19 @@
 #pragma once
-typedef unsigned long long int C_Data;
 
 class CompressionData
 {
 private:
-	C_Data data;
+	unsigned long long int data;
 
 public:
 	CompressionData();
 
-	C_Data& operator*=(const C_Data d); //”v‚Ì‘}“ü
-	C_Data& operator/=(const C_Data d); //”v‚Ìíœ
+	unsigned long long int& operator*=(const unsigned long long int d); //”v‚Ì‘}“ü
+	unsigned long long int& operator/=(const unsigned long long int d); //”v‚Ìíœ
 
-	const C_Data& operator%(const C_Data d); //‚»‚Ì”v‚ª‚ ‚é‚©‚Ì˜_—Z(–ß‚è’l‚ÍC_Data)
+	const unsigned long long int& operator%(const unsigned long long int d); //‚»‚Ì”v‚ª‚ ‚é‚©‚Ì˜_—Z(–ß‚è’l‚ÍC_Data)
 
-	bool operator==(const C_Data d);
-	bool operator!=(const C_Data d);
+	bool operator==(const unsigned long long int d);
+	bool operator!=(const unsigned long long int d);
 };
 

@@ -20,9 +20,9 @@ public:
 
 	CompressionData& Get_C_Data(TileType type);
 
-	C_Data& operator*=(Tile& tile); //”v‚Ì‘}“ü
-	C_Data& operator/=(Tile& tile); //”v‚Ìíœ	
-	const C_Data& operator%(Tile& tile); //‚»‚Ì”v‚ª‚ ‚é‚©‚Ì˜_—Z(–ß‚è’l‚ÍC_Data)	
+	unsigned long long int& operator*=(Tile& tile); //”v‚Ì‘}“ü
+	unsigned long long int& operator/=(Tile& tile); //”v‚Ìíœ	
+	const unsigned long long int& operator%(Tile& tile); //‚»‚Ì”v‚ª‚ ‚é‚©‚Ì˜_—Z(–ß‚è’l‚ÍC_Data)	
 
 	void ExtractHai(Tile& tile); //”v‚ğ”²‚«o‚·		
 	void InsertHai(Tile& tile);  //”v‚ğ·‚µ‚Ş

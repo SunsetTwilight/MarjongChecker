@@ -9,23 +9,22 @@ bool MarjongChecker::CheckHai(Tile& tile)
 }
 
 bool MarjongChecker::CheckToitsu(Tile& tile)
-{
-	for (int i = 0; i < 2; i++)
+{	
+	if (CheckHai(tile))
 	{
+		data.ExtractHai(tile);
 		if (CheckHai(tile))
 		{
-			for (int k = 0; k < i; k++)
-			{
-				data.ExtractHai(tile);
-			}
+			data.InsertHai(tile);
+			return true;
 		}
-		else return false;
+		else
+		{
+			data.InsertHai(tile);
+			return false;
+		}
 	}
-	for (int i = 0; i < 2; i++)
-	{
-		data.InsertHai(tile);
-	}
-	return true;
+	return false;
 }
 
 bool MarjongChecker::CheckTartsu(Tile& tile, unsigned int patarn) //(num) を先頭として考える (patarn) はターツの並び順 (0 = 連番,1 = 1つ飛ばし)
@@ -48,22 +47,32 @@ bool MarjongChecker::CheckTartsu(Tile& tile, unsigned int patarn) //(num) を先頭
 
 bool MarjongChecker::CheckKoutsu(Tile& tile)
 {
-	for (int i = 0; i < 3; i++)
+	if (CheckHai(tile))
 	{
+		data.ExtractHai(tile);
 		if (CheckHai(tile))
 		{
-			for (int k = 0; k < i; k++)
+			data.ExtractHai(tile);
+			if (CheckHai(tile))
 			{
-				data.ExtractHai(tile);
+				data.InsertHai(tile);
+				data.InsertHai(tile);
+				return true;
+			}
+			else
+			{
+				data.InsertHai(tile);
+				data.InsertHai(tile);
+				return false;
 			}
 		}
-		else return false;
+		else
+		{
+			data.InsertHai(tile);
+			return false;
+		}
 	}
-	for (int i = 0; i < 3; i++)
-	{
-		data.InsertHai(tile);
-	}
-	return true;
+	return false;
 }
 
 bool MarjongChecker::CheckSyuntsu(Tile& tile) //(num) を先頭として考える

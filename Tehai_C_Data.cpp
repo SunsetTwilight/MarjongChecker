@@ -53,15 +53,15 @@ CompressionData& Tehai_C_Data::Get_C_Data(TileType type)
 	}
 }
 
-C_Data& Tehai_C_Data::operator*=(Tile& tile) //”v‚Ì‘}“ü
+unsigned long long int& Tehai_C_Data::operator*=(Tile& tile) //”v‚Ì‘}“ü
 {
 	return CheckType(tile) *= PrimeTable::GetPrimeNumber(tile.GetTileNum() % 9);
 }
-C_Data& Tehai_C_Data::operator/=(Tile& tile) //”v‚Ìíœ
+unsigned long long int& Tehai_C_Data::operator/=(Tile& tile) //”v‚Ìíœ
 {
 	return CheckType(tile) /= PrimeTable::GetPrimeNumber(tile.GetTileNum() % 9);
 }
-const C_Data& Tehai_C_Data::operator%(Tile& tile) //‚»‚Ì”v‚ª‚ ‚é‚©‚Ì˜_—ŽZ(–ß‚è’l‚ÍC_Data)
+const unsigned long long int& Tehai_C_Data::operator%(Tile& tile) //‚»‚Ì”v‚ª‚ ‚é‚©‚Ì˜_—ŽZ(–ß‚è’l‚ÍC_Data)
 {
 	return CheckType(tile) % PrimeTable::GetPrimeNumber(tile.GetTileNum() % 9);
 }
@@ -76,5 +76,7 @@ void Tehai_C_Data::InsertHai(Tile& tile)  //”v‚ð·‚µž‚Þ
 }
 bool Tehai_C_Data::ExistHai(Tile& tile)	//”v‚Ì‘¶Ý”»’è 
 {
-	return this->operator%(tile);
+	bool a = !(bool)this->operator%(tile);
+
+	return a;
 }
