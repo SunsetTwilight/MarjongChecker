@@ -56,15 +56,15 @@ unsigned int DefaultFormChecker::SetSyuntsuFrontList(DefaultForm& res_form, Marj
 
     for (unsigned int i = 0; i < 4; i++)
     {
-        if (check.CheckType((TileType)i))
+        if (res_check.CheckType((TileType)i))
         {
             for (unsigned int j = 0; j < 9; j++)
             {
-                if (check.CheckSyuntsu(i * 9 + j))
+                if (res_check.CheckSyuntsu(i * 9 + j))
                 {
-                    check.ExtractHai(i * 9 + j);
-                    check.ExtractHai(i * 9 + j + 1);
-                    check.ExtractHai(i * 9 + j + 2);
+                    res_check.ExtractHai(i * 9 + j);
+                    res_check.ExtractHai(i * 9 + j + 1);
+                    res_check.ExtractHai(i * 9 + j + 2);
 
                     res_form.comp_face.push_back(DefaultCompleteFace(DefaultCompleteFaceType::Syuntsu, i * 9 + j));
                     j--;
@@ -85,15 +85,15 @@ unsigned int DefaultFormChecker::SetSyuntsuBackList(DefaultForm& res_form, Marjo
 
     for (unsigned int i = 0; i < 3; i++)
     {
-        if (check.CheckType((TileType)i) != 1)
+        if (res_check.CheckType((TileType)i) != 1)
         {
             for (unsigned int j = 6; 0 < j; j--)
             {
-                if (check.CheckSyuntsu(i * 9 + j))
+                if (res_check.CheckSyuntsu(i * 9 + j))
                 {
-                    check.ExtractHai(i * 9 + j);
-                    check.ExtractHai(i * 9 + j + 1);
-                    check.ExtractHai(i * 9 + j + 2);
+                    res_check.ExtractHai(i * 9 + j);
+                    res_check.ExtractHai(i * 9 + j + 1);
+                    res_check.ExtractHai(i * 9 + j + 2);
 
                     res_form.comp_face.push_back(DefaultCompleteFace(DefaultCompleteFaceType::Syuntsu, i * 9 + j));
                     j++;
@@ -115,16 +115,16 @@ unsigned int DefaultFormChecker::SetToitsuList(DefaultForm& res_form, MarjongChe
 
     for (unsigned int i = 0; i < 4; i++)
     {
-        if (check.CheckType((TileType)i))
+        if (res_check.CheckType((TileType)i))
         {
             if (i == 4)
             {
                 for (unsigned int j = 0; j < 7; j++)
                 {
-                    if (check.CheckToitsu(i * 9 + j))
+                    if (res_check.CheckToitsu(i * 9 + j))
                     {
-                        check.ExtractHai(i * 9 + j);
-                        check.ExtractHai(i * 9 + j);
+                        res_check.ExtractHai(i * 9 + j);
+                        res_check.ExtractHai(i * 9 + j);
 
                         res_form.one_miss_face.push_back(DefaultMissingFace(DefaultMissingFaceForm::Toitsu, i * 9 + j));
                         count++;
@@ -135,10 +135,10 @@ unsigned int DefaultFormChecker::SetToitsuList(DefaultForm& res_form, MarjongChe
             {
                 for (unsigned int j = 0; j < 9; j++)
                 {
-                    if (check.CheckToitsu(i * 9 + j))
+                    if (res_check.CheckToitsu(i * 9 + j))
                     {
-                        check.ExtractHai(i * 9 + j);
-                        check.ExtractHai(i * 9 + j);
+                        res_check.ExtractHai(i * 9 + j);
+                        res_check.ExtractHai(i * 9 + j);
 
                         res_form.one_miss_face.push_back(DefaultMissingFace(DefaultMissingFaceForm::Toitsu, i * 9 + j));
                         count++;
@@ -159,23 +159,21 @@ unsigned int DefaultFormChecker::SetTartsuFrontList(DefaultForm& res_form, Marjo
 
     for (unsigned int i = 0; i < 3; i++)
     {
-        if (check.CheckType((TileType)i))
+        if (res_check.CheckType((TileType)i))
         {
-            unsigned int start_num = 0;
-            unsigned int patarn_num = 0;
-
-            for (unsigned int j = 0; j < 15; j++)
+            for (int j = 0; j < 8; j++)
             {
-                start_num = j / 8;
-                patarn_num = j % 2;
-                if (check.CheckTartsu(i * 9 + start_num, patarn_num))
+                for (int k = 0; k < 2; k++)
                 {
-                    check.ExtractHai(i * 9 + start_num);
-                    check.ExtractHai(i * 9 + start_num + patarn_num + 1);
+                    if (res_check.CheckTartsu(i * 9 + j, k))
+                    {
+                        if (j == 8 && k == 1) continue;
+                        res_check.ExtractHai(i * 9 + j);
+                        res_check.ExtractHai(i * 9 + j + k);
 
-                    res_form.one_miss_face.push_back(DefaultMissingFace((DefaultMissingFaceForm)(patarn_num + 1), i * 9 + j));
-                    j--;
-                    count++;
+                        res_form.one_miss_face.push_back(DefaultMissingFace((DefaultMissingFaceForm)(k + 1), i * 9 + j));
+                        count++;
+                    }
                 }
             }
         }
@@ -192,23 +190,21 @@ unsigned int DefaultFormChecker::SetTartsuBackList(DefaultForm& res_form, Marjon
 
     for (unsigned int i = 0; i < 3; i++)
     {
-        if (check.CheckType((TileType)i))
+        if (res_check.CheckType((TileType)i))
         {
-            unsigned int start_num = 0;
-            unsigned int patarn_num = 0;
-
-            for (int j = 14; 0 <= j; j--)
+            for (int j = 7; 0 <= j; j--)
             {
-                start_num = j / 8;
-                patarn_num = j % 2;
-                if (check.CheckTartsu(i * 9 + start_num, patarn_num))
+                for (int k = 1; 0 <= k; k--)
                 {
-                    check.ExtractHai(i * 9 + start_num);
-                    check.ExtractHai(i * 9 + start_num + patarn_num + 1);
+                    if (res_check.CheckTartsu(i * 9 + j, k))
+                    {
+                        if (j == 8 && k == 1) continue;
+                        res_check.ExtractHai(i * 9 + j);
+                        res_check.ExtractHai(i * 9 + j + k);
 
-                    res_form.one_miss_face.push_back(DefaultMissingFace((DefaultMissingFaceForm)(patarn_num + 1), i * 9 + j));
-                    j++;
-                    count++;
+                        res_form.one_miss_face.push_back(DefaultMissingFace((DefaultMissingFaceForm)(k + 1), i * 9 + j));
+                        count++;
+                    }
                 }
             }
         }
