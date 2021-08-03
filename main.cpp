@@ -2,11 +2,25 @@
 #include "MarjongChecker.h"
 #include "DefaultTehai.h"
 
+template<class _Ty>
+class Memory
+{
+
+
+
+public:
+	Memory();
+	~Memory();
+
+	void push_back(_Ty ty);
+
+};
+
 int main()
 {
 	unsigned int num_list[14] =
 	{
-		0,0,0,1,2,3,4,5,6,7,8,8,8,24
+		0,0,0,1,1,1,2,2,2,3,3,3,4,24
 	};
 
 	DefaultTehai tehai;
@@ -19,8 +33,7 @@ int main()
 	DefaultFormChecker dfc;
 	dfc.CreateFormList(tehai);
 
-	std::vector<DefaultForm> list = dfc.GetList();
-
+	/*std::vector<DefaultForm> list = dfc.GetList();
 	for (int i = 0; i < list.size(); i++)
 	{
 		for (int k = 0; k < list[i].comp_face.size(); k++)
@@ -64,6 +77,6 @@ int main()
 			printf("%d,",list[i].remainder_tile[k].GetTileNum());
 		}
 		printf("\n\n");
-	}
+	}*/
 	return 0;
 }

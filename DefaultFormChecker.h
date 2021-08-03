@@ -25,6 +25,7 @@ private:
     unsigned int SetTartsuBackList(DefaultForm& res_form, MarjongChecker& res_check, DefaultForm form, MarjongChecker check);
 
     void SetFormList(DefaultForm& res_form, MarjongChecker& res_check);
+    void DefaultCreatePartOfOneMiss(DefaultForm& form, MarjongChecker& check);
     void DefaultCreate(DefaultForm form, MarjongChecker check);
 
 public:

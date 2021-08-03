@@ -237,6 +237,42 @@ void DefaultFormChecker::SetFormList(DefaultForm& form, MarjongChecker& check)
     form_list.push_back(form);
 }
 
+void DefaultFormChecker::DefaultCreatePartOfOneMiss(DefaultForm& form, MarjongChecker& check)
+{
+    DefaultForm f02;
+    MarjongChecker c02;
+    SetToitsuList(f02, c02, form, check);
+    {
+        DefaultForm f03;
+        MarjongChecker c03;
+        SetTartsuFrontList(f03, c03, f02, c02);
+        {
+            SetFormList(f03, c03);
+        }
+        SetTartsuBackList(f03, c03, f02, c02);
+        {
+            SetFormList(f03, c03);
+        }
+    }
+    SetTartsuFrontList(f02, c02, form, check);
+    {
+        DefaultForm f03;
+        MarjongChecker c03;
+        SetToitsuList(f03, c03, f02, c02);
+        {
+            SetFormList(f03, c03);
+        }
+    }
+    SetTartsuBackList(f02, c02, form, check);
+    {
+        DefaultForm f03;
+        MarjongChecker c03;
+        SetToitsuList(f03, c03, f02, c02);
+        {
+            SetFormList(f03, c03);
+        }
+    }
+}
 
 void DefaultFormChecker::DefaultCreate(DefaultForm form, MarjongChecker check)
 {
@@ -248,75 +284,29 @@ void DefaultFormChecker::DefaultCreate(DefaultForm form, MarjongChecker check)
         MarjongChecker c01;
         SetSyuntsuFrontList(f01, c01, f00, c00);
         {
-            DefaultForm f02;
-            MarjongChecker c02;
-            SetToitsuList(f02, c02, f01, c01);
-            {
-                DefaultForm f03;
-                MarjongChecker c03;
-                SetTartsuFrontList(f03, c03, f02, c02);
-                {
-                    SetFormList(f03, c03);
-                }
-                SetTartsuBackList(f03, c03, f02, c02);
-                {
-                    SetFormList(f03, c03);
-                }
-            }
-            SetTartsuFrontList(f02, c02, f01, c01);
-            {
-                DefaultForm f03;
-                MarjongChecker c03;
-                SetToitsuList(f03, c03, f02, c02);
-                {
-                    SetFormList(f03, c03);
-                }
-            }
-            SetTartsuBackList(f02, c02, f01, c01);
-            {
-                DefaultForm f03;
-                MarjongChecker c03;
-                SetToitsuList(f03, c03, f02, c02);
-                {
-                    SetFormList(f03, c03);
-                }
-            }
+            DefaultCreatePartOfOneMiss(f01, c01);
         }
         SetSyuntsuBackList(f01, c01, f00, c00);
         {
-            DefaultForm f02;
-            MarjongChecker c02;
-            SetToitsuList(f02, c02, f01, c01);
-            {
-                DefaultForm f03;
-                MarjongChecker c03;
-                SetTartsuFrontList(f03, c03, f02, c02);
-                {
-                    SetFormList(f03, c03);
-                }
-                SetTartsuBackList(f03, c03, f02, c02);
-                {
-                    SetFormList(f03, c03);
-                }
-            }
-            SetTartsuFrontList(f02, c02, f01, c01);
-            {
-                DefaultForm f03;
-                MarjongChecker c03;
-                SetToitsuList(f03, c03, f02, c02);
-                {
-                    SetFormList(f03, c03);
-                }
-            }
-            SetTartsuBackList(f02, c02, f01, c01);
-            {
-                DefaultForm f03;
-                MarjongChecker c03;
-                SetToitsuList(f03, c03, f02, c02);
-                {
-                    SetFormList(f03, c03);
-                }
-            }
+            DefaultCreatePartOfOneMiss(f01, c01);
+        }
+    }
+    SetSyuntsuFrontList(f00, c00, form, check);
+    {
+        DefaultForm f01;
+        MarjongChecker c01;
+        SetKoutsuList(f01, c01, f00, c00);
+        {
+            DefaultCreatePartOfOneMiss(f01, c01);
+        }
+    }
+    SetSyuntsuBackList(f00, c00, form, check);
+    {
+        DefaultForm f01;
+        MarjongChecker c01;
+        SetKoutsuList(f01, c01, f00, c00);
+        {
+            DefaultCreatePartOfOneMiss(f01, c01);
         }
     }
 }
@@ -342,8 +332,11 @@ bool DefaultFormChecker::CreateFormList(Tehai tehai)
 
             DefaultCreate(form, checker);
         }
-
+    }
+    for (int i = 0; i < 34; i++)
+    {
         //“ª‚ª–³‚¢‚Æ‰¼’è‚µ‚½ê‡‚Ìˆ—
+        MarjongChecker checker;
         checker.Set_TehaiData(tehai);
         DefaultForm form_1 = {};
 
