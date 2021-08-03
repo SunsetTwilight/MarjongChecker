@@ -85,7 +85,7 @@ unsigned int DefaultFormChecker::SetSyuntsuBackList(DefaultForm& res_form, Marjo
 
     for (unsigned int i = 0; i < 3; i++)
     {
-        if (res_check.CheckType((TileType)i) != 1)
+        if (res_check.CheckType((TileType)i))
         {
             for (unsigned int j = 6; 0 < j; j--)
             {
@@ -165,11 +165,12 @@ unsigned int DefaultFormChecker::SetTartsuFrontList(DefaultForm& res_form, Marjo
             {
                 for (int k = 0; k < 2; k++)
                 {
-                    if (res_check.CheckTartsu(i * 9 + j, k))
+                    unsigned int num = k;
+                    if (res_check.CheckTartsu(i * 9 + j, num))
                     {
                         if (j == 8 && k == 1) continue;
                         res_check.ExtractHai(i * 9 + j);
-                        res_check.ExtractHai(i * 9 + j + k);
+                        res_check.ExtractHai(i * 9 + j + k + 1);
 
                         res_form.one_miss_face.push_back(DefaultMissingFace((DefaultMissingFaceForm)(k + 1), i * 9 + j));
                         count++;
@@ -196,11 +197,12 @@ unsigned int DefaultFormChecker::SetTartsuBackList(DefaultForm& res_form, Marjon
             {
                 for (int k = 1; 0 <= k; k--)
                 {
-                    if (res_check.CheckTartsu(i * 9 + j, k))
+                    unsigned int num = k;
+                    if (res_check.CheckTartsu(i * 9 + j, num))
                     {
                         if (j == 8 && k == 1) continue;
                         res_check.ExtractHai(i * 9 + j);
-                        res_check.ExtractHai(i * 9 + j + k);
+                        res_check.ExtractHai(i * 9 + j + k + 1);
 
                         res_form.one_miss_face.push_back(DefaultMissingFace((DefaultMissingFaceForm)(k + 1), i * 9 + j));
                         count++;
@@ -224,374 +226,134 @@ void DefaultFormChecker::SetFormList(DefaultForm& form, MarjongChecker& check)
         {
             for (unsigned int j = 0; j < 9; j++)
             {
-                check.CheckHai((i * 9) + j);
-                form.remainder_tile.push_back((i * 9) + j);
+                if (check.CheckHai((i * 9) + j))
+                {
+                    form.remainder_tile.push_back((i * 9) + j);
+                }
             }
         }
     }
 
-    curFormList.push_back(form);
+    form_list.push_back(form);
+}
+
+
+void DefaultFormChecker::DefaultCreate(DefaultForm form, MarjongChecker check)
+{
+    DefaultForm f00;
+    MarjongChecker c00;
+    SetKoutsuList(f00, c00, form, check);
+    {
+        DefaultForm f01;
+        MarjongChecker c01;
+        SetSyuntsuFrontList(f01, c01, f00, c00);
+        {
+            DefaultForm f02;
+            MarjongChecker c02;
+            SetToitsuList(f02, c02, f01, c01);
+            {
+                DefaultForm f03;
+                MarjongChecker c03;
+                SetTartsuFrontList(f03, c03, f02, c02);
+                {
+                    SetFormList(f03, c03);
+                }
+                SetTartsuBackList(f03, c03, f02, c02);
+                {
+                    SetFormList(f03, c03);
+                }
+            }
+            SetTartsuFrontList(f02, c02, f01, c01);
+            {
+                DefaultForm f03;
+                MarjongChecker c03;
+                SetToitsuList(f03, c03, f02, c02);
+                {
+                    SetFormList(f03, c03);
+                }
+            }
+            SetTartsuBackList(f02, c02, f01, c01);
+            {
+                DefaultForm f03;
+                MarjongChecker c03;
+                SetToitsuList(f03, c03, f02, c02);
+                {
+                    SetFormList(f03, c03);
+                }
+            }
+        }
+        SetSyuntsuBackList(f01, c01, f00, c00);
+        {
+            DefaultForm f02;
+            MarjongChecker c02;
+            SetToitsuList(f02, c02, f01, c01);
+            {
+                DefaultForm f03;
+                MarjongChecker c03;
+                SetTartsuFrontList(f03, c03, f02, c02);
+                {
+                    SetFormList(f03, c03);
+                }
+                SetTartsuBackList(f03, c03, f02, c02);
+                {
+                    SetFormList(f03, c03);
+                }
+            }
+            SetTartsuFrontList(f02, c02, f01, c01);
+            {
+                DefaultForm f03;
+                MarjongChecker c03;
+                SetToitsuList(f03, c03, f02, c02);
+                {
+                    SetFormList(f03, c03);
+                }
+            }
+            SetTartsuBackList(f02, c02, f01, c01);
+            {
+                DefaultForm f03;
+                MarjongChecker c03;
+                SetToitsuList(f03, c03, f02, c02);
+                {
+                    SetFormList(f03, c03);
+                }
+            }
+        }
+    }
 }
 
 bool DefaultFormChecker::CreateFormList(Tehai tehai)
 {
-    curFormList.clear();
+    form_list.clear();
     MarjongChecker data;
-    data.Set_TehaiData(tehai);
+    data.Set_TehaiData(tehai);	
 
-	//雀頭があると仮定した場合の処理
-
-	Tile tile;
-    for (int i = 0; i < 33; i++)
+    for (int i = 0; i < 34; i++)
     {
-        tile.SetTileNum(i);
-        if (data.CheckToitsu(tile)) //雀頭（対子）がある
-        {
-            MarjongChecker checker = data;
-            DefaultForm form = {};
+        //雀頭があると仮定した場合の処理
+        MarjongChecker checker;
+        checker.Set_TehaiData(tehai);
+        DefaultForm form = {};
 
+        if (checker.CheckToitsu(i)) //雀頭（対子）がある
+        {
             checker.ExtractHai(i);
             checker.ExtractHai(i);
             form.one_miss_face.push_back(DefaultMissingFace(DefaultMissingFaceForm::Toitsu, i));
 
-            DefaultForm f00;
-            MarjongChecker c00;
-            SetKoutsuList(f00, c00, form, checker);
-            {
-                DefaultForm f01;
-                MarjongChecker c01;
-                SetSyuntsuFrontList(f01, c01, f00, c00);
-                {
-                    DefaultForm f02;
-                    MarjongChecker c02;
-                    SetToitsuList(f02, c02, f01, c01);
-                    {
-                        DefaultForm f03;
-                        MarjongChecker c03;
-                        SetTartsuFrontList(f03, c03, f02, c02);
-                        {
-                            SetFormList(f03, c03);
-                        }
-                        SetTartsuBackList(f03, c03, f02, c02);
-                        {
-                            SetFormList(f03, c03);
-                        }
-                    }
-                    SetTartsuFrontList(f02, c02, f01, c01);
-                    {
-                        DefaultForm f03;
-                        MarjongChecker c03;
-                        SetToitsuList(f03, c03, f02, c02);
-                        {
-                            SetFormList(f03, c03);
-                        }
-                    }
-                    SetTartsuBackList(f02, c02, f01, c01);
-                    {
-                        DefaultForm f03;
-                        MarjongChecker c03;
-                        SetToitsuList(f03, c03, f02, c02);
-                        {
-                            SetFormList(f03, c03);
-                        }
-                    }
-                }
-                SetSyuntsuBackList(f01, c01, f00, c00);
-                {
-                    DefaultForm f02;
-                    MarjongChecker c02;
-                    SetToitsuList(f02, c02, f01, c01);
-                    {
-                        DefaultForm f03;
-                        MarjongChecker c03;
-                        SetTartsuFrontList(f03, c03, f02, c02);
-                        {
-                            SetFormList(f03, c03);
-                        }
-                        SetTartsuBackList(f03, c03, f02, c02);
-                        {
-                            SetFormList(f03, c03);
-                        }
-                    }
-                    SetTartsuFrontList(f02, c02, f01, c01);
-                    {
-                        DefaultForm f03;
-                        MarjongChecker c03;
-                        SetToitsuList(f03, c03, f02, c02);
-                        {
-                            SetFormList(f03, c03);
-                        }
-                    }
-                    SetTartsuBackList(f02, c02, f01, c01);
-                    {
-                        DefaultForm f03;
-                        MarjongChecker c03;
-                        SetToitsuList(f03, c03, f02, c02);
-                        {
-                            SetFormList(f03, c03);
-                        }
-                    }
-                }
-            }
-        }
-    }
-
-    {
-        MarjongChecker checker = data;
-        DefaultForm form = {};
-
-        DefaultForm f00;
-        MarjongChecker c00;
-        SetSyuntsuFrontList(f00, c00, form, checker);
-        {
-            DefaultForm f01;
-            MarjongChecker c01;
-            SetKoutsuList(f01, c01, f00, c00);
-            {
-                DefaultForm f02;
-                MarjongChecker c02;
-                SetToitsuList(f02, c02, f01, c01);
-                {
-                    DefaultForm f03;
-                    MarjongChecker c03;
-                    SetTartsuFrontList(f03, c03, f02, c02);
-                    {
-                        SetFormList(f03, c03);
-                    }
-                    SetTartsuBackList(f03, c03, f02, c02);
-                    {
-                        SetFormList(f03, c03);
-                    }
-                }
-                SetTartsuFrontList(f02, c02, f01, c01);
-                {
-                    DefaultForm f03;
-                    MarjongChecker c03;
-                    SetToitsuList(f03, c03, f02, c02);
-                    {
-                        SetFormList(f03, c03);
-                    }
-                }
-                SetTartsuBackList(f02, c02, f01, c01);
-                {
-                    DefaultForm f03;
-                    MarjongChecker c03;
-                    SetToitsuList(f03, c03, f02, c02);
-                    {
-                        SetFormList(f03, c03);
-                    }
-                }
-            }
-        }
-        SetSyuntsuBackList(f00, c00, form, checker);
-        {
-            DefaultForm f01;
-            MarjongChecker c01;
-            SetKoutsuList(f01, c01, f00, c00);
-            {
-                DefaultForm f02;
-                MarjongChecker c02;
-                SetToitsuList(f02, c02, f01, c01);
-                {
-                    DefaultForm f03;
-                    MarjongChecker c03;
-                    SetTartsuFrontList(f03, c03, f02, c02);
-                    {
-                        SetFormList(f03, c03);
-                    }
-                    SetTartsuBackList(f03, c03, f02, c02);
-                    {
-                        SetFormList(f03, c03);
-                    }
-                }
-                SetTartsuFrontList(f02, c02, f01, c01);
-                {
-                    DefaultForm f03;
-                    MarjongChecker c03;
-                    SetToitsuList(f03, c03, f02, c02);
-                    {
-                        SetFormList(f03, c03);
-                    }
-                }
-                SetTartsuBackList(f02, c02, f01, c01);
-                {
-                    DefaultForm f03;
-                    MarjongChecker c03;
-                    SetToitsuList(f03, c03, f02, c02);
-                    {
-                        SetFormList(f03, c03);
-                    }
-                }
-            }
+            DefaultCreate(form, checker);
         }
 
-        MarjongChecker checker_1 = data;
+        //雀頭が無いと仮定した場合の処理
+        checker.Set_TehaiData(tehai);
         DefaultForm form_1 = {};
 
-        DefaultForm f00_1;
-        MarjongChecker c00_1;
-        SetKoutsuList(f00_1, c00_1, form_1, checker_1);
+        if (checker.CheckHai(i))
         {
-            DefaultForm f01;
-            MarjongChecker c01;
-            SetSyuntsuFrontList(f01, c01, f00, c00);
-            {
-                DefaultForm f02;
-                MarjongChecker c02;
-                SetToitsuList(f02, c02, f01, c01);
-                {
-                    DefaultForm f03;
-                    MarjongChecker c03;
-                    SetTartsuFrontList(f03, c03, f02, c02);
-                    {
-                        SetFormList(f03, c03);
-                    }
-                    SetTartsuBackList(f03, c03, f02, c02);
-                    {
-                        SetFormList(f03, c03);
-                    }
-                }
-                SetTartsuFrontList(f02, c02, f01, c01);
-                {
-                    DefaultForm f03;
-                    MarjongChecker c03;
-                    SetToitsuList(f03, c03, f02, c02);
-                    {
-                        SetFormList(f03, c03);
-                    }
-                }
-                SetTartsuBackList(f02, c02, f01, c01);
-                {
-                    DefaultForm f03;
-                    MarjongChecker c03;
-                    SetToitsuList(f03, c03, f02, c02);
-                    {
-                        SetFormList(f03, c03);
-                    }
-                }
-            }
-            SetSyuntsuBackList(f01, c01, f00, c00);
-            {
-                DefaultForm f02;
-                MarjongChecker c02;
-                SetToitsuList(f02, c02, f01, c01);
-                {
-                    DefaultForm f03;
-                    MarjongChecker c03;
-                    SetTartsuFrontList(f03, c03, f02, c02);
-                    {
-                        SetFormList(f03, c03);
-                    }
-                    SetTartsuBackList(f03, c03, f02, c02);
-                    {
-                        SetFormList(f03, c03);
-                    }
-                }
-                SetTartsuFrontList(f02, c02, f01, c01);
-                {
-                    DefaultForm f03;
-                    MarjongChecker c03;
-                    SetToitsuList(f03, c03, f02, c02);
-                    {
-                        SetFormList(f03, c03);
-                    }
-                }
-                SetTartsuBackList(f02, c02, f01, c01);
-                {
-                    DefaultForm f03;
-                    MarjongChecker c03;
-                    SetToitsuList(f03, c03, f02, c02);
-                    {
-                        SetFormList(f03, c03);
-                    }
-                }
-            }
-        }
-        SetSyuntsuFrontList(f00, c00, form, checker);
-        {
-            DefaultForm f01;
-            MarjongChecker c01;
-            SetKoutsuList(f01, c01, f00, c00);
-            {
-                DefaultForm f02;
-                MarjongChecker c02;
-                SetToitsuList(f02, c02, f01, c01);
-                {
-                    DefaultForm f03;
-                    MarjongChecker c03;
-                    SetTartsuFrontList(f03, c03, f02, c02);
-                    {
-                        SetFormList(f03, c03);
-                    }
-                    SetTartsuBackList(f03, c03, f02, c02);
-                    {
-                        SetFormList(f03, c03);
-                    }
-                }
-                SetTartsuFrontList(f02, c02, f01, c01);
-                {
-                    DefaultForm f03;
-                    MarjongChecker c03;
-                    SetToitsuList(f03, c03, f02, c02);
-                    {
-                        SetFormList(f03, c03);
-                    }
-                }
-                SetTartsuBackList(f02, c02, f01, c01);
-                {
-                    DefaultForm f03;
-                    MarjongChecker c03;
-                    SetToitsuList(f03, c03, f02, c02);
-                    {
-                        SetFormList(f03, c03);
-                    }
-                }
-            }
-        }
-        SetSyuntsuBackList(f00, c00, form, checker);
-        {
-            DefaultForm f01;
-            MarjongChecker c01;
-            SetKoutsuList(f01, c01, f00, c00);
-            {
-                DefaultForm f02;
-                MarjongChecker c02;
-                SetToitsuList(f02, c02, f01, c01);
-                {
-                    DefaultForm f03;
-                    MarjongChecker c03;
-                    SetTartsuFrontList(f03, c03, f02, c02);
-                    {
-                        SetFormList(f03, c03);
-                    }
-                    SetTartsuBackList(f03, c03, f02, c02);
-                    {
-                        SetFormList(f03, c03);
-                    }
-                }
-                SetTartsuFrontList(f02, c02, f01, c01);
-                {
-                    DefaultForm f03;
-                    MarjongChecker c03;
-                    SetToitsuList(f03, c03, f02, c02);
-                    {
-                        SetFormList(f03, c03);
-                    }
-                }
-                SetTartsuBackList(f02, c02, f01, c01);
-                {
-                    DefaultForm f03;
-                    MarjongChecker c03;
-                    SetToitsuList(f03, c03, f02, c02);
-                    {
-                        SetFormList(f03, c03);
-                    }
-                }
-            }
-        }
-    }
-	//雀頭が無いと仮定した場合の処理
+            checker.ExtractHai(i);
+            form_1.remainder_tile.push_back(i);
 
-
+            DefaultCreate(form_1, checker);
+        }
+    } 	
     return true;
 }

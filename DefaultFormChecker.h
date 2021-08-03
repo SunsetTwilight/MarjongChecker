@@ -25,15 +25,14 @@ private:
     unsigned int SetTartsuBackList(DefaultForm& res_form, MarjongChecker& res_check, DefaultForm form, MarjongChecker check);
 
     void SetFormList(DefaultForm& res_form, MarjongChecker& res_check);
-
-    std::vector<DefaultForm> curFormList;
+    void DefaultCreate(DefaultForm form, MarjongChecker check);
 
 public:
     bool CreateFormList(Tehai tehai);
 
     std::vector<DefaultForm> GetList()
     {
-        return curFormList;
+        return form_list;
     }
 
     DefaultFormChecker() {}

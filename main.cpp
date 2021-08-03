@@ -6,7 +6,7 @@ int main()
 {
 	unsigned int num_list[14] =
 	{
-		0,0,0,1,2,3,4,5,6,7,8,8,8,8
+		0,0,0,1,2,3,4,5,6,7,8,8,8,24
 	};
 
 	DefaultTehai tehai;
